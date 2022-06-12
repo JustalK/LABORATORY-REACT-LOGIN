@@ -4,7 +4,8 @@
  */
 
 import React from 'react'
-import Seo from '@components/Seo'
+import CustomInput from '@components/CustomInput'
+import { useForm } from 'react-hook-form'
 
 /**
  * @function Home
@@ -12,11 +13,31 @@ import Seo from '@components/Seo'
  * @return {Object} Return the dom of the Home page
  */
 const Home = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
+
+  const onSubmit = (data) => console.log(data)
+
   return (
-    <>
-      <Seo title="Home" description="Description of Home" />
-      Test
-    </>
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CustomInput
+          register={register}
+          name="lastname"
+          conditions={{ required: true }}
+          errors={errors}
+        />
+        <select {...register('gender')}>
+          <option value="female">female</option>
+          <option value="male">male</option>
+          <option value="other">other</option>
+        </select>
+        <input type="submit" />
+      </form>
+    </div>
   )
 }
 
