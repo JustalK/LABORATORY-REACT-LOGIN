@@ -6,6 +6,7 @@
 import React from 'react'
 import CustomForm from '@components/CustomForm'
 import CustomInput from '@components/CustomInput'
+import useToken from '@hooks/useToken'
 
 /**
  * @function Home
@@ -13,7 +14,10 @@ import CustomInput from '@components/CustomInput'
  * @return {Object} Return the dom of the Home page
  */
 const Home = () => {
-  const onSubmit = (data) => console.log(data)
+  const { setToken } = useToken()
+  const onSubmit = (data) => {
+    setToken(JSON.stringify(data))
+  }
 
   return (
     <div>
