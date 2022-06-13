@@ -13,7 +13,7 @@ import useToken from '@hooks/useToken'
  * Create the component Home
  * @return {Object} Return the dom of the Home page
  */
-const Home = () => {
+const Login = () => {
   const { setToken } = useToken()
   const onSubmit = (data) => {
     setToken(JSON.stringify(data))
@@ -29,4 +29,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Login
