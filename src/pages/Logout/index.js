@@ -5,6 +5,7 @@
 
 import React, { useEffect } from 'react'
 import useToken from '@hooks/useToken'
+import { Redirect } from 'react-router-dom'
 
 /**
  * @function Home
@@ -18,7 +19,7 @@ const Logout = () => {
     unsetToken()
   }, [])
 
-  return <div>Removing token</div>
+  return <Redirect replace to="/" />
 }
 
 export default Logout

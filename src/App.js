@@ -1,5 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Switch,
+  Route
+} from 'react-router-dom'
 import {
   ROUTE_LOGOUT,
   ROUTE_LOGIN,
@@ -17,10 +22,6 @@ import useToken from '@hooks/useToken'
 export default function App() {
   const { token } = useToken()
 
-  if (!token) {
-    return <Login />
-  }
-
   return (
     <Router>
       <Switch>
@@ -28,16 +29,20 @@ export default function App() {
           <Public />
         </Route>
         <Route path={ROUTE_PRIVATE}>
-          <Private />
+          {token ? <Private /> : <Redirect replace to={ROUTE_LOGIN} />}
         </Route>
         <Route path={ROUTE_PRIVATE_DASHBOARD}>
-          <PrivateDashboard />
+          {token ? <PrivateDashboard /> : <Redirect replace to={ROUTE_LOGIN} />}
         </Route>
         <Route path={ROUTE_LOGOUT}>
-          <Logout />
+          {token ? <Logout /> : <Redirect replace to={ROUTE_LOGIN} />}
         </Route>
         <Route path={ROUTE_LOGIN}>
-          <Login />
+          {token ? (
+            <Redirect replace to={ROUTE_PRIVATE_DASHBOARD} />
+          ) : (
+            <Login />
+          )}
         </Route>
       </Switch>
     </Router>

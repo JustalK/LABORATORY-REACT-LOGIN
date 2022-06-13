@@ -14,6 +14,6 @@ export default function useToken() {
   return {
     setToken: saveToken,
     unsetToken,
-    token
+    token: Object.keys(token).length ? token : null
   }
 }
