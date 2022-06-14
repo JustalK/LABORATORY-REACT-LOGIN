@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useCookies } from 'react-cookie'
 
 export default function useToken() {
@@ -11,9 +12,13 @@ export default function useToken() {
     removeCookie('name')
   }
 
+  const getToken = useMemo(() => {
+    return Object.keys(token).length ? token : null
+  }, [token])
+
   return {
     setToken: saveToken,
     unsetToken,
-    token: Object.keys(token).length ? token : null
+    token: getToken
   }
 }

@@ -28,7 +28,11 @@ export default function App() {
    * @return {React.JSX} The page or redirection depending if the user has a token
    * */
   const isRegisteredRoute = (page) => {
-    return token ? { page } : <Redirect replace to={ROUTE_LOGIN} />
+    return token ? (
+      React.createElement(page, {})
+    ) : (
+      <Redirect replace to={ROUTE_LOGIN} />
+    )
   }
 
   /**
@@ -37,7 +41,11 @@ export default function App() {
    * @return {React.JSX} The page or redirection depending if the user has a token
    * */
   const isNotRegisteredRoute = (page) => {
-    return token ? <Redirect replace to={ROUTE_DASHBOARD} /> : { page }
+    return token ? (
+      <Redirect replace to={ROUTE_DASHBOARD} />
+    ) : (
+      React.createElement(page, {})
+    )
   }
 
   return (
