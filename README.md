@@ -4,6 +4,8 @@
 
 This project is a minimum example of how to manage a login with a session token.
 
+I wanted to create a simple tutorial for some of my colleague to understand the logic. It uses `react-hook-form` for managing the login form and `react-cookie` for managing the connection cookie.
+
 ## Plan of the presentation
 
 I explain with all the details how I build the project and my way of working.
@@ -70,6 +72,8 @@ Inside the useToken, we can do 3 things, set the token, get the token and check 
 - **jsdoc**: For managing the dev documentation of the project
 - **react-router-dom**: For managing the router and the path to the differents pages
 - **react-helmet**: For managing the meta of the differents page
+- **react-cookie**: For managing the cookie of the user
+- **react-hook-form**: For managing the login form
 
 ## Running
 
