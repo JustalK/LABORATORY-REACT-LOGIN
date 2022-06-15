@@ -1,17 +1,8 @@
-# REACT APP TEMPLATE
-
-[![Maintainability Status](https://api.codeclimate.com/v1/badges/f6f7ed79501f794ce74d/maintainability)](https://codeclimate.com/github/JustalK/REACT-APP/maintainability)
-![David](https://img.shields.io/david/justalk/REACT-APP)
+# LABORATORY REACT LOGIN SESSION
 
 ## Goal
 
-This project is a template for building react-app with all my favorite tools already configured.
-
-Obviously, the app is using the latest version of `react`. For avoiding the relative path, I modified the webpack and allowing the import with an alias. I also added the support for sass files.
-
-In addition, I added `prettier` and configured it for working well with `esLint`. Finally, I added the basic usefull package such as the router and the helmet.
-
-The maintainability of the project is checked by `codeclimate`.
+This project is a minimum example of how to manage a login with a session token.
 
 ## Plan of the presentation
 
@@ -47,12 +38,23 @@ npm run build:docs
 | :------------ | :------------------------------------------------------ |
 | components    | Regroup the components used inside the pages            |
 | constants     | Regroup the exported constants                          |
+| hooks         | Regroup the react hooks                                 |
 | pages         | Regroup the components representing the pages           |
-| services      | Regroup the services of the app                         |
+| services      | Regroup the services for calling API                    |
 | styles        | Regroup the scss files                                  |
 
 
 ## Development
+#### Logic
+
+Inside the App.js, we get the token using the useToken hook.
+If the token exist, we let the user going wherever he want excepted login. In case the user want to go to the login page with a valid token, we redirect him to the private dashboard.
+If the token does not exist, we redirect the user to the login page.
+The public pages does not check the token at all.
+
+Inside the useToken, we can do 3 things, set the token, get the token and check the token. When the user successfully login, we save his token. The checkToken check that the token exist and check using the backend that this one is good (in this minimal version, I am just checking his value). In case the token has been changed manually, the token is invalid and the user is considered without a token.
+
+
 #### Packages
 
 - **react-app-rewired**: Allow us to rewrite the config of React without ejecting the app
@@ -79,11 +81,4 @@ npm run start
 
 ## Commands
 
-- **npm run start**: Run the build version on a local server
-- **npm run dev**: Run the linter and then the project in Devlopment mode
-- **npm run build**: Build the project
-- **npm run test**: Run the test of the project
-- **npm run eject**: Eject the application (sometimes necessary)
-- **npm run linter:fix**: Run the linter and fix the errors
-- **npm run build:docs**: Build the documentation from the comments in the code
-- **npm run check-update**: Check if the package are up to date (for now, everything is except the testing and webvital)
+- **npm run dev**: Run the linter and then the project in development mode
