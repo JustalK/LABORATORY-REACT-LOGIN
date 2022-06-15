@@ -2,18 +2,24 @@ import { useMemo } from 'react'
 import { useCookies } from 'react-cookie'
 
 export default function useToken() {
-  const [token, setToken, removeCookie] = useCookies(['name'])
+  const [token, setToken, removeCookie] = useCookies(['token'])
 
   const saveToken = (userToken) => {
-    setToken('name', JSON.stringify(userToken), { path: '/' })
+    setToken('token', userToken, { path: '/' })
   }
 
   const unsetToken = () => {
-    removeCookie('name')
+    removeCookie('token')
+  }
+
+  const checkToken = () => {
+    // This function will normally make a call to the BE for checking if the
+    // Token is correct. Incase, it's not, we invalidate the token
+    return Object.keys(token).length && token.token === 'QpwL5tke4Pnpja7X4'
   }
 
   const getToken = useMemo(() => {
-    return Object.keys(token).length ? token : null
+    return checkToken() ? token : null
   }, [token])
 
   return {

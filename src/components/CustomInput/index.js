@@ -10,10 +10,10 @@ import React from 'react'
  * Create the component for Input
  * @return {Object} Return the dom of the Seo page
  */
-const CustomInput = ({ register, name, conditions, errors }) => {
+const CustomInput = ({ register, placeholder, name, conditions, errors }) => {
   return (
     <>
-      <input {...register(name, conditions)} />
+      <input placeholder={placeholder} {...register(name, conditions)} />
       {errors[name]?.type === 'required' && <span>Required</span>}
     </>
   )

@@ -7,6 +7,7 @@ import React from 'react'
 import CustomForm from '@components/CustomForm'
 import CustomInput from '@components/CustomInput'
 import useToken from '@hooks/useToken'
+import { postAPI } from '@services/api'
 
 /**
  * @function Home
@@ -15,15 +16,28 @@ import useToken from '@hooks/useToken'
  */
 const Login = () => {
   const { setToken } = useToken()
-  const onSubmit = (data) => {
-    setToken(JSON.stringify(data))
+  const onSubmit = async (data) => {
+    const rsl = await postAPI('https://reqres.in/api/login', data)
+    if (rsl.responseStatus !== 200) {
+      console.log(rsl.error)
+    } else {
+      setToken(rsl.token)
+    }
   }
 
   return (
     <div>
       <CustomForm onSubmit={onSubmit}>
-        <CustomInput name="login" conditions={{ required: true }} />
-        <CustomInput name="password" conditions={{ required: true }} />
+        <CustomInput
+          name="email"
+          conditions={{ required: true }}
+          placeholder="eve.holt@reqres.in"
+        />
+        <CustomInput
+          name="password"
+          conditions={{ required: true }}
+          placeholder="cityslicka"
+        />
       </CustomForm>
     </div>
   )
